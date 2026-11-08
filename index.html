@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f28c28">
+<title>Temple Guard — Protect Every Pilgrim</title>
+<style>
+:root{--saffron:#ef8b24;--green:#176b45;--ink:#17231d;--muted:#65736b;--paper:#fffdf8;--line:#e9e4d9}
+*{box-sizing:border-box}body{margin:0;background:#f5f3ed;color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:linear-gradient(120deg,#fff4df,#fffdf8);padding:22px 18px 18px;border-bottom:1px solid var(--line)}
+.wrap{max-width:760px;margin:auto}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}.mark{width:42px;height:42px;border-radius:14px;background:var(--saffron);display:grid;place-items:center;color:white;font-size:23px}
+.tag{color:var(--green);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;margin-top:18px}
+h1{font-size:30px;line-height:1.15;margin:7px 0 10px;max-width:560px}p{margin:0 0 12px;color:var(--muted)}
+nav{display:flex;gap:8px;overflow:auto;padding:12px 16px;background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+nav button,.btn{border:0;border-radius:999px;padding:10px 14px;background:#f2eee5;color:var(--ink);font-weight:650;white-space:nowrap}
+nav button.active,.btn.primary{background:var(--green);color:white}
+main{padding:18px 16px 50px}.section{display:none}.section.active{display:block}
+h2{font-size:22px;margin:4px 0 12px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.card{background:white;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 3px 12px #26332608}
+.card h3{margin:0 0 5px;font-size:17px}.small{font-size:13px;color:var(--muted)}
+.pill{display:inline-block;border-radius:999px;padding:4px 9px;background:#edf5ef;color:var(--green);font-size:12px;font-weight:700;margin:5px 0}
+.notice{border-left:4px solid var(--saffron);background:#fff5e7;padding:12px;border-radius:8px;margin:12px 0;font-size:14px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d9d5cb;border-radius:10px;background:white;font:inherit;margin:5px 0 12px}
+label{font-size:14px;font-weight:650}textarea{min-height:95px;resize:vertical}
+button{cursor:pointer}.btn{border-radius:10px;padding:12px 16px}.row{display:flex;gap:8px;flex-wrap:wrap}
+.price{font-size:23px;font-weight:800;color:var(--green)}footer{text-align:center;color:var(--muted);font-size:12px;padding:22px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <div class="brand"><div class="mark">ॐ</div><div>Temple Guard<div class="small">Protect Every Pilgrim</div></div></div>
+ <div class="tag">Transparency • Trust • Devotion</div>
+ <h1>Visit temples with confidence.</h1>
+ <p>Find temple information, compare listed charges and share concerns responsibly.</p>
+ <div class="notice"><b>Demo prototype:</b> The temple entries and prices below are examples only, not verified official information.</div>
+</div></header>
+<nav aria-label="Main navigation">
+ <button class="active" data-tab="home">Home</button><button data-tab="temples">Temples</button><button data-tab="prices">Price checker</button><button data-tab="report">Report issue</button><button data-tab="join">Join us</button>
+</nav>
+<main class="wrap">
+<section id="home" class="section active">
+ <h2>Welcome to Temple Guard</h2>
+ <div class="grid">
+  <div class="card"><h3>🛕 Temple directory</h3><p>Explore sample temple listings across India.</p><button class="btn primary" data-go="temples">Explore temples</button></div>
+  <div class="card"><h3>₹ Price checker</h3><p>Understand the difference between official, vendor-submitted and devotee-reported information.</p><button class="btn primary" data-go="prices">Check prices</button></div>
+  <div class="card"><h3>📝 Report an issue</h3><p>Share a concern for review. Avoid posting personal details about others.</p><button class="btn primary" data-go="report">Make a report</button></div>
+ </div>
+</section>
+<section id="temples" class="section">
+ <h2>Temple directory</h2><label for="search">Search by temple, city or state</label><input id="search" placeholder="Try Telangana or Tirupati">
+ <div class="grid" id="templeList"></div>
+</section>
+<section id="prices" class="section">
+ <h2>Price checker</h2>
+ <div class="notice">No official charges have been verified in this demo. Always confirm prices with the temple administration or its official notice board.</div>
+ <div class="grid">
+  <div class="card"><span class="pill">Official information</span><h3>Verified by temple source</h3><p>Will show only after checking an official source and recording the date.</p><b>Not available in demo</b></div>
+  <div class="card"><span class="pill">Vendor submitted</span><h3>Submitted by a vendor</h3><p>Vendor-provided prices must be labelled as submissions, not official rates.</p><b>Sample data only</b></div>
+  <div class="card"><span class="pill">Devotee reported</span><h3>Reported by visitors</h3><p>Reports are unverified until reviewed. One report does not prove wrongdoing.</p><b>Sample data only</b></div>
+ </div>
+</section>
+<section id="report" class="section">
+ <h2>Report an issue</h2><p>This demo form does not send or save reports. It only previews your entry on this device.</p>
+ <form id="reportForm">
+  <label>Temple name</label><input required id="rTemple" placeholder="Enter temple name">
+  <label>Issue category</label><select id="rType"><option>Footwear or luggage charge</option><option>Price transparency</option><option>Other concern</option></select>
+  <label>What happened? (Do not include anyone's private information)</label><textarea required id="rDetails" placeholder="Describe the issue factually..."></textarea>
+  <button class="btn primary" type="submit">Preview report</button>
+ </form><div id="reportResult" class="notice" hidden></div>
+</section>
+<section id="join" class="section">
+ <h2>Join Temple Guard</h2><div class="grid">
+  <div class="card"><h3>🙏 Devotees</h3><p>Find information and submit responsible feedback.</p></div>
+  <div class="card"><h3>🏪 Vendors</h3><p>Share your services and clearly labelled prices.</p></div>
+  <div class="card"><h3>🏛️ Temple administrators</h3><p>Help verify official information and review reports.</p></div>
+ </div>
+ <div class="notice">Account creation, online submissions, moderation and live data are not connected yet. They will need a secure backend in a later development phase.</div>
+</section>
+</main>
+<footer>Temple Guard • Early prototype • Demo information only</footer>
+<script>
+const temples=[
+ {name:"Kanaka Durga Temple",city:"Vijayawada",state:"Andhra Pradesh"},
+ {name:"Yadadri Lakshmi Narasimha Temple",city:"Yadadri",state:"Telangana"},
+ {name:"Sri Venkateswara Temple",city:"Tirumala",state:"Andhra Pradesh"},
+ {name:"Meenakshi Amman Temple",city:"Madurai",state:"Tamil Nadu"},
+ {name:"Jagannath Temple",city:"Puri",state:"Odisha"},
+ {name:"Shree Mahakaleshwar Temple",city:"Ujjain",state:"Madhya Pradesh"}
+];
+const list=document.getElementById("templeList");
+function render(q=""){list.innerHTML="";temples.filter(t=>(t.name+" "+t.city+" "+t.state).toLowerCase().includes(q.toLowerCase())).forEach(t=>{const d=document.createElement("article");d.className="card";d.innerHTML=`<h3>${t.name}</h3><div class="small">${t.city}, ${t.state}</div><span class="pill">Demo listing</span>`;list.appendChild(d)})}
+render();document.getElementById("search").addEventListener("input",e=>render(e.target.value));
+function show(id){document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));window.scrollTo(0,0)}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.tab)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.go)));
+document.getElementById("reportForm").addEventListener("submit",e=>{e.preventDefault();const out=document.getElementById("reportResult");out.hidden=false;out.textContent="Preview only — "+document.getElementById("rTemple").value+" | "+document.getElementById("rType").value+". This report has not been sent or saved.";});
+</script>
+</body></html>
